@@ -11,10 +11,10 @@ function Dashboard() {
   // Choose data based on selected model
   const forecastHorizon = selectedModel === 'gru' ? '24 hours' : '4 days';
 
-  // Calculate overall daily power
-  const calculateDailyEnergy = (day) => {
-    return day.avgPower * 24;
-  };
+  // Calculate overall daily power for autoformer
+const calculateDailyEnergy = (day) => {
+  return day.totalEnergy;
+};
 
   // Calculate total energy for GRU
   let gruTotalEnergy = 0;
@@ -42,7 +42,7 @@ function Dashboard() {
     labels: ['0-24 hours', '24-48 hours', '48-72 hours', '72-96 hours'],
     datasets: [
       {
-        label: 'Daily Energy Production (Wh)',
+        label: 'Daily Energy Production (W)',
         data: autoformerPredictions.map(p => calculateDailyEnergy(p) * numPanels),
         backgroundColor: 'rgba(75, 192, 192, 0.7)',
         borderColor: 'rgb(75, 192, 192)',
@@ -70,7 +70,7 @@ function Dashboard() {
         beginAtZero: true,
         title: {
           display: true,
-          text: selectedModel === 'gru' ? 'Power (Watts)' : 'Energy (Wh)'
+          text: selectedModel === 'gru' ? 'Power (Watts)' : 'Energy (W)'
         }
       },
       x: {
@@ -199,8 +199,8 @@ function Dashboard() {
           <div className="stat-card">
             <div className="stat-value">
               {selectedModel === 'gru'
-                ? `${(gruTotalEnergy * numPanels / 1000).toFixed(1)}kWh`
-                : `${(totalEnergyProduction * numPanels / 1000).toFixed(1)}kWh`
+                ? `${(gruTotalEnergy * numPanels / 1000).toFixed(1)}kW`
+                : `${(totalEnergyProduction * numPanels / 1000).toFixed(1)}kW`
               }
             </div>
             <div className="stat-label">

@@ -192,12 +192,12 @@ function ShortTermForecast() {
                   <td colSpan="2"><strong>Total ({hoursToShow} hours)</strong></td>
                   <td>
                     <strong>
-                      {Math.round(displayedPredictions.reduce((sum, p) => sum + p.predictedPower, 0))}Wh
+                      {Math.round(displayedPredictions.reduce((sum, p) => sum + p.predictedPower, 0))}W
                     </strong>
                   </td>
                   <td>
                     <strong style={{ color: '#0d6efd' }}>
-                      {(displayedPredictions.reduce((sum, p) => sum + p.predictedPower, 0) * numPanels / 1000).toFixed(2)}kWh
+                      {(displayedPredictions.reduce((sum, p) => sum + p.predictedPower, 0) * numPanels / 1000).toFixed(2)}kW
                     </strong>
                   </td>
                 </tr>
@@ -218,7 +218,7 @@ function ShortTermForecast() {
         <div className="col-md-4">
           <div className="stat-card">
             <div className="stat-value">
-              {(totalEnergy * numPanels / 1000).toFixed(1)}kWh
+              {(totalEnergy * numPanels / 1000).toFixed(1)}kW
             </div>
             <div className="stat-label">Total Production (24h)</div>
           </div>

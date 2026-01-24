@@ -82,7 +82,7 @@ function LongTermForecast() {
 
   // Calculate daily energy
   const calculateDailyEnergy = (day) => {
-    return day.avgPower * 24;
+    return day.totalEnergy;
   };
 
   // Filter predictions based on selected days
@@ -310,7 +310,7 @@ function LongTermForecast() {
                   <th>Day</th>
                   <th>Avg Power (W)</th>
                   <th>Max Power (W)</th>
-                  <th>Power per Panel (Wh)</th>
+                  <th>Power per Panel (W)</th>
                   <th>Total Energy ({numPanels} panels)</th>
                 </tr>
               </thead>
@@ -322,10 +322,10 @@ function LongTermForecast() {
                       <td><strong>Day {index + 1}</strong></td>
                       <td>{Math.round(prediction.avgPower)}W</td>
                       <td><strong style={{ color: '#198754' }}>{Math.round(prediction.maxPower)}W</strong></td>
-                      <td>{Math.round(dailyEnergy)}Wh</td>
+                      <td>{Math.round(dailyEnergy)}W</td>
                       <td>
                         <strong style={{ color: '#0d6efd' }}>
-                          {(dailyEnergy * numPanels / 1000).toFixed(2)}kWh
+                          {(dailyEnergy * numPanels / 1000).toFixed(2)}kW
                         </strong>
                       </td>
                     </tr>
@@ -343,12 +343,12 @@ function LongTermForecast() {
                   </td>
                   <td>
                     <strong>
-                      {Math.round(displayedTotalEnergy)}Wh
+                      {Math.round(displayedTotalEnergy)}W
                     </strong>
                   </td>
                   <td>
                     <strong style={{ color: '#0d6efd' }}>
-                      {(displayedTotalEnergy * numPanels / 1000).toFixed(2)}kWh
+                      {(displayedTotalEnergy * numPanels / 1000).toFixed(2)}kW
                     </strong>
                   </td>
                 </tr>
@@ -369,7 +369,7 @@ function LongTermForecast() {
         <div className="col-md-4">
           <div className="stat-card">
             <div className="stat-value">
-              {(totalEnergy * numPanels / 1000).toFixed(1)}kWh
+              {(totalEnergy * numPanels / 1000).toFixed(1)}kW
             </div>
             <div className="stat-label">Total Production (4 days)</div>
           </div>

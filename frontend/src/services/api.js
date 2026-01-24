@@ -60,6 +60,7 @@ export const processGRUData = (gruForecast) => {
 };
 
 // Process Autoformer data for daily summary (4 days)
+// Process Autoformer data for daily summary (4 days)
 export const processAutoformerData = (autoformerForecast) => {
   const predictions = [];
   const now = new Date();
@@ -69,6 +70,9 @@ export const processAutoformerData = (autoformerForecast) => {
     const startIdx = day * 24;
     const endIdx = startIdx + 24;
     const dayData = autoformerForecast.slice(startIdx, endIdx);
+    
+    // Calculate total energy by summing all 24 hours
+    const totalEnergy = dayData.reduce((sum, val) => sum + val, 0);
     
     // Filter out zeros for average calculation (nighttime hours)
     const validPowers = dayData.filter(p => p > 0);
@@ -81,6 +85,7 @@ export const processAutoformerData = (autoformerForecast) => {
     
     predictions.push({
       date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      totalEnergy: totalEnergy,  
       avgPower: avgPower,
       minPower: Math.min(...dayData.filter(p => p > 0), Infinity) === Infinity ? 0 : Math.min(...dayData.filter(p => p > 0)),
       maxPower: Math.max(...dayData)
