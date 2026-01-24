@@ -1,6 +1,7 @@
 import pandas as pd
 from ast import Dict
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 from typing import List
 from src.fetchers.AshalimStation import AshalimStation
 from src.fetchers.IMSWeatherAPI import IMSWeatherAPI
@@ -20,6 +21,11 @@ def fetch_data():
 
     data = station_ashalim.get_normalized_data(from_date, to_date)
 
+    # Calculate how many hours to skip from start
+    hours_to_skip_start = from_date.hour
+
+    data = data[hours_to_skip_start:]  # Skip initial hours to align to full hours
+
     print(f"Fetched {len(data)} records.")
 
     return fill_data_gaps(data)
@@ -29,14 +35,18 @@ def get_time_range():
     """
     Get current time rounded to last 10 minutes and 14 days prior.
     """
-    now = datetime.now()
+    israel_tz = ZoneInfo('Asia/Jerusalem')
+    now = datetime.now(israel_tz)
     
     # Round down to last 10-minute interval
     minutes = (now.minute // 10) * 10
     end_time = now.replace(minute=minutes, second=0, microsecond=0)
     
-    # Get time exactly 14 days prior
-    start_time = end_time - timedelta(days=14)
+    # add day for api syntax
+    end_time = end_time + timedelta(days=1)
+    
+    # Get time exactly 15 days prior
+    start_time = end_time - timedelta(days=15)
     
     return start_time, end_time
 
