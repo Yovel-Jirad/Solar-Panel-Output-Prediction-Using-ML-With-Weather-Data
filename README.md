@@ -14,6 +14,11 @@ The system achieves high accuracy rates of 86.32% (GRU) and 91.50% (Autoformer) 
 
 🌐 **[Try it here](https://solar-forecast-frontend.vercel.app/)**
 
+## Deployment Repositories
+
+🌐 **[FrontEnd](https://github.com/Yovel-Jirad/solar-forecast-frontend/)**
+🌐 **[BackEnd](https://github.com/Shwayke/solar-forecast-backend/)**
+
 ## Key Features
 
 - Real-time weather data integration from IMS API
