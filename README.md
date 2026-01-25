@@ -36,7 +36,7 @@ The Production System consists of:
 ## Tech Stack
 
 **Frontend**: React.js, Chart.js, Bootstrap  
-**Backend**: Python, Flask, Keras, TensorFlow, PyTorch, Docker
+**Backend**: Python, Flask, Keras, TensorFlow, PyTorch, Docker  
 **Deployment**: Vercel (frontend), Google Cloud Run (backend)
 
 ## Installation & Usage
